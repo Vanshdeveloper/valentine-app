@@ -140,7 +140,7 @@
 
             <div id="your-paragraph-div">
                 <label for="your-paragraph">Something for you'r crush:</label>
-                <input type="text" id="your_paragraph" name="your_paragraph" placeholder="Type you'r feelings" required>
+                <input type="text" id="your_paragraph" placeholder="Type you'r feelings" required>
             </div>
 
             <div class="message-type-div">
@@ -158,17 +158,20 @@
     <script>
         const messageType = document.getElementById("message_type");
         const para_element = document.getElementById("your-paragraph-div");
+        const paragraphInput = document.getElementById("your_paragraph");
 
         function handleTypeChange() {
             if (this.value === "paragraph") {
                 para_element.style.display = 'flex';
+                paragraphInput.required = true;
             } else if (this.value === "iloveyou") {
                 para_element.style.display = 'none';
-                console.log("I LOVE YOU selected 💖");
+                paragraphInput.required = false;
             }
         }
 
         messageType.addEventListener("change", handleTypeChange);
+        handleTypeChange()
     </script>
 </body>
 
