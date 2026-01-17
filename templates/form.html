@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Link Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="20">💖</text></svg>');
+            background-size: 50px 50px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #e91e63;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .your-name-div,
+        .crush-name-div,
+        .message-type-div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #your-paragraph-div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            color: #ad1457;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 2px solid #ffb3ba;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #e91e63;
+            box-shadow: 0 0 8px rgba(233, 30, 99, 0.3);
+            outline: none;
+        }
+
+        input[type="submit"] {
+            margin-top: 15px;
+            padding: 12px;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>💕 Valentine's Message Form 💕</h1>
+        <form action="/submit" method="POST">
+            <div class="your-name-div">
+                <label for="your_name">Your Name:</label>
+                <input type="text" id="your_name" name="your_name" placeholder="Enter Your name" required>
+            </div>
+
+            <div class="crush-name-div">
+                <label for="crush_name">Crush Name:</label>
+                <input type="text" id="crush_name" name="crush_name" placeholder="Enter Crush's anme" required>
+            </div>
+
+            <div id="your-paragraph-div">
+                <label for="your-paragraph">Something for you'r crush:</label>
+                <input type="text" id="your_paragraph" name="your_paragraph" placeholder="Type you'r feelings" required>
+            </div>
+
+            <div class="message-type-div">
+                <label for="message_type">Message Type:</label>
+                <select id="message_type" name="message_type">
+                    <option value="paragraph">Love Paragraph</option>
+                    <option value="iloveyou">I LOVE YOU</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Generate Link">
+        </form>
+    </div>
+
+    <script>
+        const messageType = document.getElementById("message_type");
+        const para_element = document.getElementById("your-paragraph-div");
+
+        function handleTypeChange() {
+            if (this.value === "paragraph") {
+                para_element.style.display = 'flex';
+            } else if (this.value === "iloveyou") {
+                para_element.style.display = 'none';
+                console.log("I LOVE YOU selected 💖");
+            }
+        }
+
+        messageType.addEventListener("change", handleTypeChange);
+    </script>
+</body>
+
+</html>

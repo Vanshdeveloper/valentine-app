@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Valentine Message</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="20">💖</text></svg>');
+            background-size: 30px 30px;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(233, 30, 99, 0.1);
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #e91e63;
+            margin-bottom: 18px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Great Vibes', cursive;
+            letter-spacing: 1px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 400;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .from {
+            font-size: 14px;
+            color: #ad1457;
+            margin-bottom: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .proposal {
+            margin: 35px 0;
+        }
+
+        .proposal h2 {
+            font-size: 22px;
+            color: #e91e63;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Lato', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #333;
+            position: relative;
+        }
+
+        .btn-no:hover {
+            transform: translateX(100px);
+            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+        }
+
+        .btn-send {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkle 3s infinite ease-in-out;
+        }
+
+        .sparkle:nth-child(1) {
+            animation-delay: 0s;
+            top: 20%;
+            left: 10%;
+        }
+
+        .sparkle:nth-child(2) {
+            animation-delay: 0.5s;
+            top: 30%;
+            left: 80%;
+        }
+
+        .sparkle:nth-child(3) {
+            animation-delay: 1s;
+            top: 50%;
+            left: 20%;
+        }
+
+        .sparkle:nth-child(4) {
+            animation-delay: 1.5s;
+            top: 70%;
+            left: 90%;
+        }
+
+        .sparkle:nth-child(5) {
+            animation-delay: 2s;
+            top: 10%;
+            left: 60%;
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Mobile phones (portrait and landscape) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+                margin: 8px;
+                /* max-width: 95%; */
+                width: 270px;
+            }
+
+            h1 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .message {
+                font-size: 14px;
+                margin-bottom: 14px;
+            }
+
+            .from {
+                font-size: 12px;
+                margin-bottom: 24px;
+            }
+
+            .proposal {
+                margin: 24px 0;
+            }
+
+            .proposal h2 {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+
+            .buttons {
+                /* flex-direction: column; */
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 200px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .btn-send {
+                margin-top: 12px;
+                margin-bottom: 12px;
+            }
+
+            body::before {
+                background-size: 16px 16px;
+            }
+
+            .sparkle {
+                width: 6px;
+                height: 6px;
+            }
+
+            .btn-no:hover {
+                transform: translateX(0px);
+                box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+            }
+
+        }
+
+        /* Tablets (portrait) */
+        @media (min-width: 601px) and (max-width: 768px) {
+            .container {
+                padding: 24px;
+                max-width: 450px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .message {
+                font-size: 16px;
+            }
+
+            .proposal h2 {
+                font-size: 18px;
+            }
+
+            .btn {
+                padding: 11px 20px;
+                font-size: 13px;
+                min-width: 90px;
+            }
+        }
+
+        /* Tablets (landscape) and small desktops */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 26px;
+                max-width: 480px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .message {
+                font-size: 17px;
+            }
+
+            .proposal h2 {
+                font-size: 19px;
+            }
+
+            .btn {
+                padding: 12px 22px;
+                font-size: 13px;
+            }
+        }
+
+        /* Large desktops */
+        @media (min-width: 1025px) {
+            .container {
+                padding: 28px;
+                max-width: 520px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .message {
+                font-size: 18px;
+            }
+
+            .proposal h2 {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+
+        /* Extra large screens */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 580px;
+                padding: 32px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .message {
+                font-size: 20px;
+            }
+
+            .proposal h2 {
+                font-size: 22px;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 15px;
+                min-width: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+    <div class="container">
+        <h1>💕 A Special Message for You 💕</h1>
+        <div class="message">{{ message }}</div>
+        <div class="from">From: {{ your_name }}</div>
+
+        <div class="proposal">
+            <h2>Will You Be My Valentine? 💖</h2>
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="sendResponse('yes')">Yes! 💕</button>
+                <button class="btn btn-no" onclick="sendResponse('no')">No 😢</button>
+            </div>
+        </div>
+
+        <a href="/" class="btn btn-send">Send Message 💌</a>
+    </div>
+
+
+    <script>
+        window.onload = function () {
+            const statusLink = `${window.location.origin}/status/{{ unique_id }}`;
+            prompt(
+                "See your crush's decision at 👇 (Press Ctrl+C / Long press to copy)",
+                statusLink
+            );
+        };
+
+
+        function sendResponse(answer) {
+            fetch(`/response/{{ unique_id }}/${answer}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        alert(`You selected ${answer.toUpperCase()}! 💖`);
+                    } else {
+                        alert("Error saving response!");
+                    }
+                });
+        }
+    </script>
+</body>
+
+</html>
