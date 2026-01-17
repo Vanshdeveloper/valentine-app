@@ -8,6 +8,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap');
 
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
         body {
             font-family: 'Lato', sans-serif;
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
@@ -15,7 +20,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 100%;
             margin: 0;
             text-align: center;
             position: relative;
@@ -401,6 +406,8 @@
         <div class="sparkle"></div>
         <div class="sparkle"></div>
     </div>
+
+
     <div class="container">
         <h1>💕 A Special Message for You 💕</h1>
         <div class="message">{{ message }}</div>

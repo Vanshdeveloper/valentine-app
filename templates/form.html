@@ -111,6 +111,14 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
+        #your_paragraph {
+            padding: 10px;
+            border: 2px solid #ffb3ba;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -140,7 +148,8 @@
 
             <div id="your-paragraph-div">
                 <label for="your-paragraph">Something for you'r crush:</label>
-                <input type="text" id="your_paragraph" placeholder="Type you'r feelings" required>
+                <textarea type="text" id="your_paragraph" name="your_paragraph" placeholder="Type you'r feelings"
+                    required></textarea>
             </div>
 
             <div class="message-type-div">
@@ -171,7 +180,7 @@
         }
 
         messageType.addEventListener("change", handleTypeChange);
-        handleTypeChange()
+        handleTypeChange();
     </script>
 </body>
 
