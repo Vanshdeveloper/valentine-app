@@ -21,7 +21,7 @@ else:
             json.dump({}, f)
 
 def generate_unique_id(length=6):
-    """Generate random unique ID"""
+    # """Generate random unique ID"""
     chars = string.ascii_letters + string.digits
     return ''.join(random.choice(chars) for _ in range(length))
 
@@ -57,6 +57,7 @@ def submit():
 
     return jsonify({"link": link})
 
+
 @app.route("/love/<unique_id>")
 def love_page(unique_id):
     # Load existing data safely
@@ -73,17 +74,17 @@ def love_page(unique_id):
     your_name = entry["your_name"]
     crush_name = entry["crush_name"]
     your_paragraph = entry["your_paragraph"]
-    message_type = entry["message_type"]
+    # message_type = entry["message_type"]
 
     # Message logic
-    if message_type == "paragraph":
-        message = f"{crush_name}, {your_name} just wanted to say: {your_paragraph}! ❤️"
-        return render_template("love.html", message=message, your_name=your_name, your_paragraph=your_paragraph, unique_id=unique_id)
-    elif message_type == "iloveyou":
-        message = f"{your_name} says: I LOVE YOU {crush_name}! 💖"
-        return render_template("love.html", message=message, your_name=your_name, unique_id=unique_id)
+    # if message_type == "paragraph":
+    #     message = f"{crush_name}, {your_name} just wanted to say: {your_paragraph}! ❤️"
+    #     return render_template("love.html", message=message, your_name=your_name, your_paragraph=your_paragraph, unique_id=unique_id)
+    # elif message_type == "iloveyou":
+    #     message = f"{your_name} says: I LOVE YOU {crush_name}! 💖"
+    #     return render_template("love.html", message=message, your_name=your_name, unique_id=unique_id)
 
-    # return render_template("love.html", message=message, your_name=your_name, unique_id=unique_id)
+    return render_template("love.html", message=your_paragraph, your_name=your_name, unique_id=unique_id)
 
 # Route to store Yes/No response from crush
 @app.route("/response/<unique_id>/<answer>")
@@ -133,5 +134,4 @@ def clean_old_data(data):
 
 
 if __name__ == "__main__":
-
     app.run()
