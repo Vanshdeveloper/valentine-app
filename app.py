@@ -34,31 +34,28 @@ def submit():
     your_name = request.form.get("your_name")
     crush_name = request.form.get("crush_name")
     your_paragraph = request.form.get("your_paragraph")
-    message_type = request.form.get("message_type")
 
     unique_id = generate_unique_id()
 
-    # Load existing data safely
     try:
         with open(DATA_FILE, "r") as f:
             data = json.load(f)
-    except json.JSONDecodeError:
+    except:
         data = {}
 
-    # Add new entry
     data[unique_id] = {
         "your_name": your_name,
         "crush_name": crush_name,
         "your_paragraph": your_paragraph,
-        "message_type": message_type,
-        "response": None  # store crush response later
+        "response": None
     }
 
-    # Save back
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
-    return redirect(url_for("love_page", unique_id=unique_id))
+    link = url_for("love_page", unique_id=unique_id, _external=True)
+
+    return jsonify({"link": link})
 
 @app.route("/love/<unique_id>")
 def love_page(unique_id):
@@ -136,4 +133,5 @@ def clean_old_data(data):
 
 
 if __name__ == "__main__":
+
     app.run()
