@@ -7,10 +7,7 @@ Each message generates a **unique link** and your crush can respond with **Yes**
 
 ## Features ✨
 
-- Simple **form** to enter your name, crush name, and message type  
-- Choose **message type**: 
-  - Love Paragraph  
-  - I LOVE YOU 💖  
+- Simple **form** to enter your name, crush name, and type your heart felt message  
 - Generates a **unique link** for each submission  
 - Crush can respond **Yes / No**  
 - Sender can check **status of response**  
@@ -24,3 +21,4 @@ Each message generates a **unique link** and your crush can respond with **Yes**
 1. Clone this repo:
 ```bash
 git clone https://github.com/<vanshdeveloper>/valentine-app.git
+
