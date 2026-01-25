@@ -10,6 +10,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         :root {
             --playfair-font: 'Playfair Display', serif;
@@ -22,8 +24,9 @@
             padding: 0;
             display: flex;
             justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100%;
+            min-height: 100vh;
             position: relative;
         }
 
@@ -42,8 +45,9 @@
             position: absolute;
             color: rgba(255, 182, 193, 0.3);
             /* Pale pink */
-            font-size: 50px;
+            font-size: 100px;
             animation: float 6s ease-in-out infinite;
+            color: #e07d8d;
         }
 
         .heart:nth-child(1) {
@@ -72,7 +76,7 @@
 
         .heart:nth-child(5) {
             top: 40%;
-            left: 50%;
+            left: 10%;
             animation-delay: 4s;
         }
 
@@ -93,7 +97,7 @@
             margin: 50px 0 50px 0;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: #e7e7e7 0px 8px 24px;
             max-width: 600px;
             width: 90%;
             padding: 0;
@@ -208,20 +212,33 @@
             gap: 8px;
         }
 
+        button span {
+            font-size: 15px;
+        }
+
         button:hover {
             background: #ff9a9e;
             transform: translateY(-2px);
         }
 
         button::after {
-            content: '❤️';
-            /* Small white heart icon */
             font-size: 16px;
+        }
+
+        .link-box {
+            padding: 0 20px;
+            /* background-color: #000; */
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
         }
 
         #resultLink,
         #resultLinkDeci {
-            margin: 20px;
+            width: 100%;
+            /* margin: 20px; */
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -229,6 +246,17 @@
             font-family: var(--googleSansFlex-font);
             text-align: left;
             /* display: none; */
+        }
+
+        .copy-btn {
+            margin: 0;
+            height: 45px;
+            width: 55px;
+            padding: 0px;
+            display: block;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
         }
 
         @media (max-width: 600px) {
@@ -250,17 +278,21 @@
             form {
                 padding: 0 20px 30px;
             }
+
+            .link-box {
+                gap: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="floating-hearts">
-        <div class="heart">💖</div>
+        <div class="heart">❤</div>
         <div class="heart">💕</div>
-        <div class="heart">💖</div>
+        <div class="heart">❤</div>
         <div class="heart">💕</div>
-        <div class="heart">💖</div>
+        <div class="heart">❤</div>
     </div>
 
     <div class="card">
@@ -290,15 +322,34 @@
                 <textarea id="your_paragraph" name="your_paragraph" placeholder="Write your romantic message here..."
                     required style="font-family: var(--googleSansFlex-font); font-size: 15px;"></textarea>
             </div>
-            <button type="submit" style="font-family: var(--googleSansFlex-font);">Generate My Link</button>
+            <button type="submit" style="font-family: var(--googleSansFlex-font);">Generate My Link <span class="material-symbols-outlined">favorite</span> </button>
         </form>
 
 
-        <input id="resultLink" readonly placeholder="Your generated link will appear here">
+        <div class="link-box">
+            <input id="resultLink" readonly placeholder="Your generated link will appear here">
+
+            <button class="copy-btn" onclick="copyLink()"><span class="material-symbols-outlined">content_paste</span></button>
+        </div>
         <!-- <input id="resultLinkDeci" style="margin-top: 0px;" readonly placeholder="Link to check their decision"> -->
     </div>
 
     <script>
+        // for copying generated link
+        function copyLink() {
+            const input = document.getElementById("resultLink");
+            input.select();
+            input.setSelectionRange(0, 99999); // mobile support
+
+            document.querySelector('.copy-btn').innerHTML = '<span class="material-symbols-outlined">inventory</span>';
+
+            navigator.clipboard.writeText(input.value);
+
+            alert("Link copied ❤");
+        }
+
+
+        // form connection
         const form = document.getElementById("loveForm");
 
         form.addEventListener("submit", function (e) {
