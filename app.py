@@ -83,6 +83,10 @@ def love_page(unique_id):
             data = json.load(f)
     except json.JSONDecodeError:
         data = {}
+    data = clean_old_data(data)
+
+with open(DATA_FILE, "w") as f:
+    json.dump(data, f, indent=4)
 
     if unique_id not in data:
         return "Invalid link!"
