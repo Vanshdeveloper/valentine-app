@@ -2,15 +2,16 @@
 
 A fun **Flask web app** to send a special Valentine's message to your crush!  
 Each message generates a **unique link** and your crush can respond with **Yes** or **No**.  
+Each link lasts only **5 days** and then the link will be **terminated**.
 
 ---
-##Url
-```bash
-https://valentine-app-hgeu.onrender.com
+## Url
+
+```bash 
+https://valentine-app-hgeu.onrender.com 
 ```
 ---
 
----
 
 ## Features ✨
 
@@ -28,4 +29,7 @@ https://valentine-app-hgeu.onrender.com
 1. Clone this repo:
 ```bash
 git clone https://github.com/<vanshdeveloper>/valentine-app.git
+
+
+
 
