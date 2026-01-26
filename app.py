@@ -64,9 +64,15 @@ def submit():
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=4)
 
-    link = url_for("love_page", unique_id=unique_id, _external=True)
+    # link = url_for("love_page", unique_id=unique_id, _external=True)
+    love_link = url_for("love_page", unique_id=unique_id, _external=True)
+    status_link = url_for("check_response", unique_id=unique_id, _external=True)
 
-    return jsonify({"link": link})
+    # return jsonify({"link": link})
+    return jsonify({
+        "love_link": love_link,
+        "status_link": status_link
+    })
 
 
 @app.route("/love/<unique_id>")

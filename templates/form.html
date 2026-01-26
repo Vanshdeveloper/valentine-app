@@ -35,7 +35,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 95%;
             height: 100%;
             pointer-events: none;
             z-index: 0;
@@ -225,18 +225,37 @@
             font-size: 16px;
         }
 
+        .link-box-main {
+            margin: 10px 0 20px 0;
+            display: flex;
+            flex-direction: column;
+            /* gap: 20px; */
+        }
+
         .link-box {
             padding: 0 20px;
             /* background-color: #000; */
-            height: 90px;
+            /* height: 90px; */
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
+            /* align-items: center; */
+            /* justify-content: center; */
+            flex-direction: column;
+            /* gap: 30px; */
         }
 
-        #resultLink,
-        #resultLinkDeci {
+        .link-box label {
+            margin: 20px 0 5px 0;
+            font-family: var(--googleSansFlex-font);
+        }
+
+        .input-box {
+            width: 100%;
+            display: flex;
+            gap: 20px;
+        }
+
+        #loveLink,
+        #statusLink {
             width: 100%;
             /* margin: 20px; */
             padding: 12px;
@@ -248,7 +267,8 @@
             /* display: none; */
         }
 
-        .copy-btn {
+        .copy-btn-love,
+        .copy-btn-status {
             margin: 0;
             height: 45px;
             width: 55px;
@@ -260,15 +280,19 @@
         }
 
         @media (max-width: 600px) {
+            .floating-hearts {
+                display: none;
+            }
+
             .name-fields {
                 flex-direction: column;
                 gap: 15px;
             }
 
             .card {
-                margin: 0;
+                /* margin: 0;
                 width: 100%;
-                border-radius: 0;
+                border-radius: 0; */
             }
 
             .card h1 {
@@ -280,7 +304,15 @@
             }
 
             .link-box {
-                gap: 10px;
+                /* gap: 10px; */
+            }
+        }
+
+        @media (max-width: 450px) {
+            .card {
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
             }
         }
     </style>
@@ -322,57 +354,92 @@
                 <textarea id="your_paragraph" name="your_paragraph" placeholder="Write your romantic message here..."
                     required style="font-family: var(--googleSansFlex-font); font-size: 15px;"></textarea>
             </div>
-            <button type="submit" style="font-family: var(--googleSansFlex-font);">Generate My Link <span class="material-symbols-outlined">favorite</span> </button>
+            <button type="submit" style="font-family: var(--googleSansFlex-font);">Generate My Link <span
+                    class="material-symbols-outlined">favorite</span> </button>
         </form>
 
 
-        <div class="link-box">
-            <input id="resultLink" readonly placeholder="Your generated link will appear here">
+        <div class="link-box-main">
+            <div class="link-box">
+                <label for="loveLink">Send this to your crush</label>
 
-            <button class="copy-btn" onclick="copyLink()"><span class="material-symbols-outlined">content_paste</span></button>
+                <div class="input-box">
+                    <input id="loveLink" readonly placeholder="Your generated link will appear here">
+                    <button class="copy-btn-love" onclick="copyLinkLove()"><span
+                            class="material-symbols-outlined">content_paste</span></button>
+                </div>
+            </div>
+            <div class="link-box">
+                <label for="statusLink">Check you crush decision here</label>
+
+                <div class="input-box">
+                    <input id="statusLink" readonly placeholder="Your generated link will appear here">
+                    <button class="copy-btn-status" onclick="copyLinkStatus()"><span
+                            class="material-symbols-outlined">content_paste</span></button>
+                </div>
+            </div>
         </div>
-        <!-- <input id="resultLinkDeci" style="margin-top: 0px;" readonly placeholder="Link to check their decision"> -->
     </div>
 
     <script>
         // for copying generated link
-        function copyLink() {
-            const input = document.getElementById("resultLink");
+        function copyLinkLove() {
+            const input = document.getElementById("loveLink");
             input.select();
             input.setSelectionRange(0, 99999); // mobile support
-
-            document.querySelector('.copy-btn').innerHTML = '<span class="material-symbols-outlined">inventory</span>';
-
+            document.querySelector('.copy-btn-love').innerHTML = '<span class="material-symbols-outlined">inventory</span>';
             navigator.clipboard.writeText(input.value);
-
-            alert("Link copied ❤");
         }
 
+        function copyLinkStatus() {
+            const input = document.getElementById("statusLink");
+            input.select();
+            input.setSelectionRange(0, 99999); // mobile support
+            document.querySelector('.copy-btn-status').innerHTML = '<span class="material-symbols-outlined">inventory</span>';
+            navigator.clipboard.writeText(input.value);
+        }
 
+        // ***************************************************************************************************************************
         // form connection
-        const form = document.getElementById("loveForm");
+        // const form = document.getElementById("loveForm");
 
-        form.addEventListener("submit", function (e) {
-            e.preventDefault(); // 🔥 THIS is the key
+        // form.addEventListener("submit", function (e) {
+        //     e.preventDefault(); // 🔥 THIS is the key
 
-            const formData = new FormData(form);
+        //     const formData = new FormData(form);
 
-            fetch("/submit", {
+        //     fetch("/submit", {
+        //         method: "POST",
+        //         body: formData
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             alert("Link generated!");
+        //             const resultedLinkElem = document.getElementById('resultLink');
+        //             resultedLinkElem.style.display = 'block';
+        //             resultedLinkElem.value = data.link;
+        //         })
+        //         .catch(err => {
+        //             alert("Something went wrong");
+        //             console.error(err);
+        //         });
+        // });
+
+        document.querySelector("form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            const res = await fetch("/submit", {
                 method: "POST",
                 body: formData
-            })
-                .then(res => res.json())
-                .then(data => {
-                    alert("Link generated!");
-                    const resultedLinkElem = document.getElementById('resultLink');
-                    resultedLinkElem.style.display = 'block';
-                    resultedLinkElem.value = data.link;
-                })
-                .catch(err => {
-                    alert("Something went wrong");
-                    console.error(err);
-                });
-        });
+            });
+
+            const data = await res.json();
+
+            document.getElementById("loveLink").value = data.love_link;
+            document.getElementById("statusLink").value = data.status_link;
+        })
     </script>
 </body>
 

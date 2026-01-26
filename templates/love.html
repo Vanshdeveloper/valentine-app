@@ -344,7 +344,8 @@
             <p class="heartfelt-text">{{ message }}</p>
             <div class="textBtmBorder"></div>
             <div class="buttons">
-                <button class="btn btn-yes" onclick="sendResponse('yes')">Yes, I will! <span class="material-symbols-outlined">favorite</span></button>
+                <button class="btn btn-yes" onclick="sendResponse('yes')">Yes, I will! <span
+                        class="material-symbols-outlined">favorite</span></button>
                 <button class="btn btn-no" onclick="sendResponse('no')">No</button>
             </div>
             <a href="/" class="send-message">💌 OR SEND A MESSAGE</a>
@@ -359,14 +360,6 @@
 
 
 <script>
-    window.onload = function () {
-        const statusLink = `${window.location.origin}/status/{{ unique_id }}`;
-        prompt(
-            "See your crush's decision at 👇 (Press Ctrl+C / Long press to copy)",
-            statusLink
-        );
-    };
-
     function sendResponse(answer) {
         fetch(`/response/{{ unique_id }}/${answer}`)
             .then(res => res.json())
