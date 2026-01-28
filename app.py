@@ -8,7 +8,14 @@ app = Flask(__name__)
 
 DATA_FILE = "data.json"
 
-FIVE_DAYS = 5 * 24 * 60 * 60  # 5 days
+# =========================
+# CONFIG
+# =========================
+FIVE_DAYS = 5 * 24 * 60 * 60  # 5 days (production)
+
+# =========================
+# UTILS
+# =========================
 def clean_old_data(data):
     current = time.time()
     return {
@@ -16,23 +23,36 @@ def clean_old_data(data):
         if current - v.get("created_at", current) < FIVE_DAYS
     }
 
-# Ensure data.json exists and is valid
-if not os.path.exists(DATA_FILE):
-    with open(DATA_FILE, "w") as f:
-        json.dump({}, f)
-else:
-    try:
-        with open(DATA_FILE, "r") as f:
-            json.load(f)
-    except json.JSONDecodeError:
-        with open(DATA_FILE, "w") as f:
-            json.dump({}, f)
-
 def generate_unique_id(length=6):
-    # """Generate random unique ID"""
     chars = string.ascii_letters + string.digits
     return ''.join(random.choice(chars) for _ in range(length))
 
+def load_data():
+    if not os.path.exists(DATA_FILE):
+        return {}
+
+    try:
+        with open(DATA_FILE, "r") as f:
+            data = json.load(f)
+    except json.JSONDecodeError:
+        return {}
+
+    # 🔥 CLEAN HERE
+    data = clean_old_data(data)
+
+    # save cleaned data
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+    return data
+
+def save_data(data):
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+# =========================
+# ROUTES
+# =========================
 @app.route("/")
 def home():
     return render_template("form.html")
@@ -45,94 +65,57 @@ def submit():
 
     unique_id = generate_unique_id()
 
-    try:
-        with open(DATA_FILE, "r") as f:
-            data = json.load(f)
-    except:
-        data = {}
-
-    data = clean_old_data(data)
+    data = load_data()
 
     data[unique_id] = {
         "your_name": your_name,
         "crush_name": crush_name,
         "your_paragraph": your_paragraph,
         "response": None,
-        "created_at": time.time()  
+        "created_at": time.time()
     }
 
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+    save_data(data)
 
-    # link = url_for("love_page", unique_id=unique_id, _external=True)
     love_link = url_for("love_page", unique_id=unique_id, _external=True)
     status_link = url_for("check_response", unique_id=unique_id, _external=True)
 
-    # return jsonify({"link": link})
     return jsonify({
         "love_link": love_link,
         "status_link": status_link
     })
 
-
 @app.route("/love/<unique_id>")
 def love_page(unique_id):
-    # Load existing data safely
-    try:
-        with open(DATA_FILE, "r") as f:
-            data = json.load(f)
-    except json.JSONDecodeError:
-        data = {}
-
-    data = clean_old_data(data)
-
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+    data = load_data()
 
     if unique_id not in data:
         return "Invalid link!"
 
     entry = data[unique_id]
-    your_name = entry["your_name"]
-    crush_name = entry["crush_name"]
-    your_paragraph = entry["your_paragraph"]
 
-    return render_template("love.html", message=your_paragraph, your_name=your_name, unique_id=unique_id)
+    return render_template(
+        "love.html",
+        message=entry["your_paragraph"],
+        your_name=entry["your_name"],
+        unique_id=unique_id
+    )
 
-
-# Route to store Yes/No response from crush
 @app.route("/response/<unique_id>/<answer>")
 def save_response(unique_id, answer):
-    # Load existing data
-    try:
-        with open(DATA_FILE, "r") as f:
-            data = json.load(f)
-    except json.JSONDecodeError:
-        data = {}
+    data = load_data()
 
-    if unique_id in data:
-        data[unique_id]["response"] = answer  # store Yes or No
-        with open(DATA_FILE, "w") as f:
-            json.dump(data, f, indent=4)
-        return jsonify({"status": "success"})
-    else:
+    if unique_id not in data:
         return jsonify({"status": "error", "message": "Invalid link"})
 
+    data[unique_id]["response"] = answer
+    save_data(data)
 
-# Route to check response (sender can use)
+    return jsonify({"status": "success"})
+
 @app.route("/status/<unique_id>")
 def check_response(unique_id):
-    try:
-        with open(DATA_FILE, "r") as f:
-            data = json.load(f)
-    except json.JSONDecodeError:
-        data = {}
-
-    data = clean_old_data(data)
-        
-        # 🔥 YAHI PE (save back)
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+    data = load_data()
 
     if unique_id not in data:
         return render_template(
@@ -147,7 +130,7 @@ def check_response(unique_id):
         return render_template(
             "status.html",
             status="answered",
-            message=f"They selected {response.upper()}!"
+            message=f"They selected {response.upper()} 💖"
         )
     else:
         return render_template(
@@ -156,36 +139,8 @@ def check_response(unique_id):
             message="Your crush has not responded yet ⏳"
         )
 
-#---------------------------------------------------------------------------------------
-# @app.route("/status/<unique_id>")
-# def check_response(unique_id):
-#     try:
-#         with open(DATA_FILE, "r") as f:
-#             data = json.load(f)
-#     except json.JSONDecodeError:
-#         data = {}
-
-#     if unique_id in data:
-#         response = data[unique_id].get("response")
-#         if response:
-#             return f"Your crush selected: {response.upper()} 💖"
-#         else:
-#             return "Your crush has not responded yet."
-#     else:
-#         return "Invalid link!"
-#--------------------------------------------------------------------------------------
-    
-
-# ONE_WEEK = 7 * 24 * 60 * 60
-
-# def clean_old_data(data):
-#     current = time.time()
-#     return {
-#         k: v for k, v in data.items()
-#         if current - v.get("created_at", current) < ONE_WEEK
-#     }
-
-
-
+# =========================
+# RUN
+# =========================
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
