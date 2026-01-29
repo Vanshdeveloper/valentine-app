@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=favorite" />
+
+    <style>
+        body {
+            font-family: 'Google Sans Flex', sans-serif;
+            background: linear-gradient(to bottom, #fdfcfb, #f9f7f4);
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 40px);
+        }
+
+        .heart {
+            position: absolute;
+            opacity: 0.3;
+            color: #e07d8d;
+            font-size: 120px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .heart span {
+            font-size: 50px;
+        }
+
+        .heart:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            top: 40%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(3) {
+            top: 50%;
+            right: 5%;
+            animation-delay: 4s;
+        }
+
+        .heart:nth-child(4) {
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .card {
+            margin: 50px 0 50px 0;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px #ffdfe1;
+            max-width: 600px;
+            width: 400px;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .form-img {
+            margin: 20px;
+            height: 220px;
+            border-radius: 12px;
+            background-position: bottom;
+        }
+
+        .form-img img {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 0 30px 5px;
+        }
+
+        .for-you {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .for-you .from,
+        .for-you .to {
+            font-family: 'Playfair Display', serif;
+            color: #e07d8d;
+            font-weight: 500;
+            font-size: 19px;
+        }
+
+        .for-you .name {
+            font-size: 18px;
+            text-decoration: underline;
+            font-style: italic;
+            font-family: 'google sans flex';
+        }
+
+        .main-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .heartfelt-text {
+            font-family: 'Google Sans Flex', sans-serif;
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .textBtmBorder {
+            margin: 0 0 0 10%;
+            width: 80%;
+            border-bottom: 1.5px solid #ffdfe1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .btn {
+            font-family: 'Google Sans Flex', sans-serif;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.9px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-yes {
+            background-color: #e07d8d;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-yes span {
+            font-size: 17px;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-2px);
+            box-shadow: 10px 0 10px 12px #fffafa;
+        }
+
+        .btn-no {
+            background: white;
+            color: #666;
+            border: 2px solid #ffe7e9;
+        }
+
+        .btn-no:hover {
+            background: #f9f9f9;
+        }
+
+        .send-message {
+            display: block;
+            text-align: center;
+            color: #ff9a9e;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin: 50px 0;
+        }
+
+        .send-message:hover {
+            text-decoration: underline;
+        }
+
+        .footnote {
+            margin: 30px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .quote-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 40px;
+            color: #ddd;
+            font-family: serif;
+        }
+
+        .quote-bottom {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 40px;
+            color: #ddd;
+            font-family: serif;
+        }
+
+        @media (max-width: 600px) {
+            .card-content {
+                padding: 0 20px 0px;
+            }
+
+            .send-message {
+                font-size: 14px;
+            }
+
+            .heart {
+                font-size: 60px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            body {
+                justify-content: space-between;
+            }
+
+            .card {
+                height: 100%;
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+                box-shadow: 0 0 0 0;
+            }
+
+            .card-content {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .main-heading {
+                margin: 0px 0;
+                width: 300px;
+            }
+
+            .heartfelt-text {
+                margin: 17px 0;
+            }
+
+            .textBtmBorder {
+                margin: 0 0 12px 0%;
+                width: 80%;
+                border-bottom: 1.5px solid #ffdfe1;
+            }
+
+            .buttons {
+                margin: 10px 0;
+            }
+
+            .send-message {
+                margin: 40px 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+    <div class="heart">❤</div>
+
+    <div class="card">
+        <div class="form-img">
+            <img src="/static/rose-petals-crush-side-img.png" alt="Rose petals" class="card-image">
+        </div>
+
+        <div class="card-content">
+            <div class="for-you">
+                <span class="from">From: <span class="name">{{ your_name }}</span></span>
+                <span class="to">To: <span class="name">{{ crush_name }}</span></span>
+            </div>
+            <h1 class="main-heading">Will You Be My Valentine?</h1>
+            <p class="heartfelt-text">{{ message }}</p>
+            <div class="textBtmBorder"></div>
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="sendResponse('yes')">Yes, I will! <span
+                        class="material-symbols-outlined">favorite</span></button>
+                <button class="btn btn-no" onclick="sendResponse('no')">No</button>
+            </div>
+            <a href="/" class="send-message">💌 OR SEND A MESSAGE</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p class="footnote">Made with love, just for you. — 2026</p>
+    </footer>
+</body>
+
+
+<script>
+    function sendResponse(answer) {
+        fetch(`/response/{{ unique_id }}/${answer}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    if(answer === "yes") {
+                        alert("You selected Yes, i knew it!! 💖")
+                    } else {
+                        alert("You selected, No🙂!")
+                    }
+                } else {
+                    alert("Error saving response!");
+                }
+            });
+    }
+</script>
+
+</html>
