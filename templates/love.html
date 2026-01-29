@@ -121,15 +121,24 @@
             text-align: center;
             margin-bottom: 20px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .for-you .from,
+        .for-you .to {
+            font-family: 'Playfair Display', serif;
+            color: #e07d8d;
+            font-weight: 500;
+            font-size: 19px;
         }
 
-        .for-you-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #e07d8d;
+        .for-you .name {
             font-size: 18px;
-            background: white;
-            padding: 0 10px;
+            text-decoration: underline;
+            font-style: italic;
+            font-family: 'google sans flex';
         }
 
         .main-heading {
@@ -322,10 +331,6 @@
 </head>
 
 <body>
-    <!-- <div class="heart"><span class="material-symbols-outlined">favorite</span></div> -->
-    <!-- <div class="heart"><span class="material-symbols-outlined">favorite</span></div> -->
-    <!-- <div class="heart"><span class="material-symbols-outlined">favorite</span></div> -->
-    <!-- <div class="heart"><span class="material-symbols-outlined">favorite</span></div> -->
     <div class="heart">❤</div>
     <div class="heart">❤</div>
     <div class="heart">❤</div>
@@ -338,7 +343,8 @@
 
         <div class="card-content">
             <div class="for-you">
-                <span class="for-you-text">— For You —</span>
+                <span class="from">From: <span class="name">{{ your_name }}</span></span>
+                <span class="to">To: <span class="name">{{ crush_name }}</span></span>
             </div>
             <h1 class="main-heading">Will You Be My Valentine?</h1>
             <p class="heartfelt-text">{{ message }}</p>
@@ -365,7 +371,11 @@
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    alert(`You selected ${answer.toUpperCase()}! 💖`);
+                    if(answer === "yes") {
+                        alert("You selected Yes, i knew it!! 💖")
+                    } else {
+                        alert("You selected, No🙂!")
+                    }
                 } else {
                     alert("Error saving response!");
                 }

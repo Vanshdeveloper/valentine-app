@@ -234,13 +234,8 @@
 
         .link-box {
             padding: 0 20px;
-            /* background-color: #000; */
-            /* height: 90px; */
             display: flex;
-            /* align-items: center; */
-            /* justify-content: center; */
             flex-direction: column;
-            /* gap: 30px; */
         }
 
         .link-box label {
@@ -257,14 +252,12 @@
         #loveLink,
         #statusLink {
             width: 100%;
-            /* margin: 20px; */
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
             font-family: var(--googleSansFlex-font);
             text-align: left;
-            /* display: none; */
         }
 
         .copy-btn-love,
@@ -289,22 +282,12 @@
                 gap: 15px;
             }
 
-            .card {
-                /* margin: 0;
-                width: 100%;
-                border-radius: 0; */
-            }
-
             .card h1 {
                 font-size: 28px;
             }
 
             form {
                 padding: 0 20px 30px;
-            }
-
-            .link-box {
-                /* gap: 10px; */
             }
         }
 
@@ -321,9 +304,9 @@
 <body>
     <div class="floating-hearts">
         <div class="heart">❤</div>
-        <div class="heart">💕</div>
         <div class="heart">❤</div>
-        <div class="heart">💕</div>
+        <div class="heart">❤</div>
+        <div class="heart">❤</div>
         <div class="heart">❤</div>
     </div>
 
@@ -398,32 +381,6 @@
             document.querySelector('.copy-btn-status').innerHTML = '<span class="material-symbols-outlined">inventory</span>';
             navigator.clipboard.writeText(input.value);
         }
-
-        // ***************************************************************************************************************************
-        // form connection
-        // const form = document.getElementById("loveForm");
-
-        // form.addEventListener("submit", function (e) {
-        //     e.preventDefault(); // 🔥 THIS is the key
-
-        //     const formData = new FormData(form);
-
-        //     fetch("/submit", {
-        //         method: "POST",
-        //         body: formData
-        //     })
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             alert("Link generated!");
-        //             const resultedLinkElem = document.getElementById('resultLink');
-        //             resultedLinkElem.style.display = 'block';
-        //             resultedLinkElem.value = data.link;
-        //         })
-        //         .catch(err => {
-        //             alert("Something went wrong");
-        //             console.error(err);
-        //         });
-        // });
 
         document.querySelector("form").addEventListener("submit", async function (e) {
             e.preventDefault();
