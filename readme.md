@@ -2,6 +2,9 @@
 
 A cheeky, charming, and slightly spicy single-page Valentine proposal built with a Jinja/HTML template and sweet visuals. Drop in your names, a flirtatious message, and deliver the vibe — responsibly seductive. 😉💌
 
+## Live Url 🔗
+ https://valentine-app-hgeu.onrender.com/
+
 ## Preview 👀
 Open `templates/love.html` in your browser (or serve via your web framework) to see the card: floating hearts, a rose-petals hero image, and two big buttons — "Yes, I will!" and "No" (cute either way). 🌹✨
 
