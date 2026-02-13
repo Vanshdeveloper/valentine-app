@@ -32,21 +32,3 @@ Serve through your usual static/template pipeline. Ensure the response route (`/
 Want to add new message templates, animations, or a cheekier UI? Contributions welcome — keep it playful and kind. 🥂
 
 Made with ♥, a wink, and a hint of mischief. 😘
-
-
-
-#flask  
-#python  
-#webdevelopment  
-#valentine 
-#valentine-week
-#valentine-website
-#valentine-app
-#valentine-day
-#valentine-project
-#beginner-project  
-#json  
-#backend  
-#frontend  
-#fullstack  
-#coding-project
